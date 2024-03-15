@@ -1,27 +1,3 @@
-# Tables:
-#     -Book:
-#         -id (pk)
-#         -title
-#         -author
-#         -description
-#         -coverURL
-#         -deleted
-#         -condition
-#         -datePublished
-#         -dateAdded
-#         -salePrice
-#     -Checkout:
-#         -id (pk)
-#         -date
-#         -email
-#     -Admin:
-#         -id (pk)
-#         -username (unique)
-#         -password
-#         -firstname
-#         -lastname
-#         -employeeID (unique)
-
 from config import db
 from sqlalchemy.orm import relationship
 
@@ -79,14 +55,17 @@ class Checkout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.String(255), nullable=False) #current DateTime
     email = db.Column(db.String(255), nullable=False)
+    resolved = db.Column(db.Boolean, default=False) #whether the book has been returned
 
     # Define relationship to Book
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
-    book = relationship("Book", back_populates="checkouts")
+    bookID = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    book = relationship("Book")
 
     def to_json(self): #jsonify the python object for api
         return {
             "id": self.id,
             "date": self.date,
             "email": self.email,
+            "bookID": self.bookID,
+            "resolved": self.resolved
         }
