@@ -1,0 +1,30 @@
+#footer-date {
+  margin-left: 58px;
+}
+
+.footer-container {
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  width: 800px;
+  height: 200px;
+  margin-left: 70px;
+  overflow: hidden;
+}
+
+.left-container {
+  float: left;
+  width: 47.5%;
+  text-align: center;
+}
+.left-container h2 {
+  margin-top: 10px;
+}
+
+.right-container {
+  float: left;
+  width: 47.5%;
+  text-align: center;
+}
+.right-container h2 {
+  margin-top: 10px;
+}

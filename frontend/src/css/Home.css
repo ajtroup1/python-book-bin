@@ -1,0 +1,18 @@
+.table-container {
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin: 40px;
+}
+
+.cover-img {
+  height: 120px;
+  width: auto;
+}
+
+#books-table {
+}
+td,
+th {
+  vertical-align: middle;
+}

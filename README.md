@@ -1,8 +1,13 @@
 # python-book-bin
 
+Packages:
+    -flask
+    -flask sql alchemy
+    -flask cors
+    -react
+
 Where I left off last session:
-    -Made working POST for Books API
-    -Made GET request for Books API
+    -
 
 Pages:
     -Guest:
@@ -21,6 +26,7 @@ Tables:
         -title
         -author
         -description
+        -genre
         -coverURL
         -deleted
         -condition
@@ -41,17 +47,32 @@ Tables:
 
 Endpoints (data):
     -Admin:
+        -Get All Admins '.../admins'
         -Add Admin: '.../addadmin'
-        -Edit Admin: '.../editadmin'
-        -Delete Admin: '.../deleteadmin'
+        -Edit Admin: '.../editadmin/<int:id>'
+        -Delete Admin: '.../deleteadmin/<int:id>'
 
     -Book:
         -Get All Books: '.../admin/books'
         -Get Book by ID: '.../admin/addbook/<int:id>'
         -Add Book: '.../admin/addbook'
-        -Delete Book: '.../admin/deletebook'
-        -Edit Book: '.../admin/editbook'
+        -Delete Book: '.../admin/deletebook/<int:id>'
+        -Edit Book: '.../admin/editbook/<int:id>'
         
     Checkout:
         -Get All Checkouts: '.../checkouts'
         -Get Checkout by ID: '.../checkouts/<int:id>'
+
+Pages:
+    -Customer:
+        -Home
+        -Checkout
+        -Recipt
+    Admin:
+        -Login
+        -Home
+
+My navbar needs:
+    -Admin login button
+    -Home Link
+    -Collections Link

@@ -38,6 +38,7 @@ def add_book():
     title = request.json.get('title')
     author = request.json.get('author')
     description = request.json.get('description')
+    genre = request.json.get('genre')
     coverURL = request.json.get('coverURL')
     deleted = False
     condition = request.json.get('condition')
@@ -66,10 +67,10 @@ def add_book():
 
 
     #if ANY field of book is missing
-    if not title or not author or not description or not coverURL or not condition or not datePublished or not dateAdded or not salePrice:
+    if not title or not author or not description or not genre or not coverURL or not condition or not datePublished or not dateAdded or not salePrice:
         return (jsonify({'failed trying to add book:': addBook}), 400,)
     
-    newBook = Book(title=title, author=author, description=description, coverURL=coverURL, deleted=deleted, condition=condition, datePublished=datePublished, dateAdded=dateAdded, salePrice=salePrice)
+    newBook = Book(title=title, author=author, description=description, genre=genre, coverURL=coverURL, deleted=deleted, condition=condition, datePublished=datePublished, dateAdded=dateAdded, salePrice=salePrice)
 
     try:
         db.session.add(newBook)
@@ -89,6 +90,7 @@ def edit_book(id):
     book.title = data.get('title', book.title)
     book.author = data.get('author', book.author)
     book.description = data.get('description', book.description)
+    book.genre = data.get('genre', book.genre)
     book.coverURL = data.get('coverURL', book.coverURL)
     book.condition = data.get('condition', book.condition)
     book.datePublished = data.get('datePublished', book.datePublished)

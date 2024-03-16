@@ -7,6 +7,7 @@ class Book(db.Model):
     title = db.Column(db.String(255), nullable=False)
     author = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
+    genre = db.Column(db.String(255), nullable=False)
     coverURL = db.Column(db.Text, nullable=False) #on the fontend, pass a sentinel value to indicate if there is no cover: 'none'
     deleted = db.Column(db.Boolean, default=False)
     condition = db.Column(db.String(255), nullable=False)
@@ -23,6 +24,7 @@ class Book(db.Model):
             "title": self.title,
             "author": self.author,
             "description": self.description,
+            "genre": self.genre,
             "coverURL": self.coverURL,
             "deleted": self.deleted,
             "condition": self.condition,
