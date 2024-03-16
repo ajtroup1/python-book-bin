@@ -4,6 +4,7 @@ import Collections from "./Collections.jsx";
 import AdminLogin from "./AdminLogin.jsx";
 import Home from "./Home.jsx";
 import AdminHome from "./AdminHome.jsx";
+import BooksList from "./BooksList.jsx";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
           <Route path="/collections" element={<Collections />} />
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/books-list" element={<BooksList />} />
         </Routes>
       </div>
     </Router>

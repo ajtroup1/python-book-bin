@@ -7,7 +7,7 @@ Packages:
     -react
 
 Where I left off last session:
-    -
+    -Made banner and New Additions row
 
 Pages:
     -Guest:
