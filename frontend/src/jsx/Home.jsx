@@ -25,8 +25,8 @@ function Home() {
 
   const handleNewAdditions = (books) => {
     const sortedBooks = books.slice().sort((a, b) => {
-      return b.id - a.id;
-    });
+      return b.id - a.id; //realistically, use dateAdded here, but this isnt real
+    }); 
     const recentBooks = sortedBooks.slice(0, 6);
     setNewAdditions(recentBooks);
   };
@@ -50,6 +50,9 @@ function Home() {
     navigate("/books-list");
   };
 
+  const handleCheckout = (id) => {
+    //
+  };
   return (
     <>
       {/* NAVBAR FOR GENRES AND SEARCH BAR */}
@@ -171,7 +174,12 @@ function Home() {
 
         {newAdditions.map((book, index) => (
           <div key={index} className="book-card">
-            <img src={book.coverURL} alt={book.title} className="book-cover" />
+            <img
+              src={book.coverURL}
+              alt={book.title}
+              className="book-cover"
+              onClick={handleCheckout(book.id)}
+            />
           </div>
         ))}
       </div>

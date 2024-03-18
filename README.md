@@ -1,56 +1,55 @@
 # python-book-bin
 
 Packages:
-    -flask
-    -flask sql alchemy
-    -flask cors
-    -react
+-flask
+-flask sql alchemy
+-flask cors
+-react
 
-Where I left off last session:
-    -Made banner and New Additions row
+Where I left off last session: -
 
 Pages:
-    -Guest:
-        -Home
-        -Cart
-        -Checkout
-        -Recipt
-    -Admin:
-        -Home
-        -Add Book (maybe not separate page, but modal)
-        -Edit Book (same as above, maybe modal same form)
+-Guest:
+-Home
+-Cart
+-Checkout
+-Recipt
+-Admin:
+-Home
+-Add Book (maybe not separate page, but modal)
+-Edit Book (same as above, maybe modal same form)
 
 Tables:
-    -Book:
-        -id (pk)
-        -title
-        -author
-        -description
-        -genre
-        -coverURL
-        -deleted
-        -condition
-        -datePublished
-        -dateAdded
-        -salePrice
-    -Checkout:
-        -id (pk)
-        -date
-        -email
-    -Admin:
-        -id (pk)
-        -username (unique)
-        -password
-        -firstname
-        -lastname
-        -employeeID (unique)
+-Book:
+-id (pk)
+-title
+-author
+-description
+-genre
+-coverURL
+-deleted
+-condition
+-datePublished
+-dateAdded
+-salePrice
+-Checkout:
+-id (pk)
+-date
+-email
+-Admin:
+-id (pk)
+-username (unique)
+-password
+-firstname
+-lastname
+-employeeID (unique)
 
 Endpoints (data):
-    -Admin:
-        -Get All Admins '.../admins'
-        -Add Admin: '.../addadmin'
-        -Edit Admin: '.../editadmin/<int:id>'
-        -Delete Admin: '.../deleteadmin/<int:id>'
+-Admin:
+-Get All Admins '.../admins'
+-Add Admin: '.../addadmin'
+-Edit Admin: '.../editadmin/<int:id>'
+-Delete Admin: '.../deleteadmin/<int:id>'
 
     -Book:
         -Get All Books: '.../admin/books'
@@ -58,21 +57,21 @@ Endpoints (data):
         -Add Book: '.../admin/addbook'
         -Delete Book: '.../admin/deletebook/<int:id>'
         -Edit Book: '.../admin/editbook/<int:id>'
-        
+
     Checkout:
         -Get All Checkouts: '.../checkouts'
         -Get Checkout by ID: '.../checkouts/<int:id>'
 
 Pages:
-    -Customer:
-        -Home
-        -Checkout
-        -Recipt
-    Admin:
-        -Login
-        -Home
+-Customer:
+-Home
+-Checkout
+-Recipt
+Admin:
+-Login
+-Home
 
 My navbar needs:
-    -Admin login button
-    -Home Link
-    -Collections Link
+-Admin login button
+-Home Link
+-Collections Link
