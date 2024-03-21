@@ -15,9 +15,15 @@ function Home() {
     try {
       const response = await fetch("http://127.0.0.1:5000/books");
       const data = await response.json();
-      setBooks(data.books);
-      console.log("Books received:", data.books);
-      handleNewAdditions(data.books);
+      let filteredBooks = [];
+      data.books.forEach((book) => {
+        if (!book.deleted) {
+          filteredBooks.push(book);
+        }
+      });
+      setBooks(filteredBooks);
+      console.log("Books received:", filteredBooks);
+      handleNewAdditions(filteredBooks);
     } catch (error) {
       console.error("Error fetching books:", error);
     }
@@ -26,7 +32,7 @@ function Home() {
   const handleNewAdditions = (books) => {
     const sortedBooks = books.slice().sort((a, b) => {
       return b.id - a.id; //realistically, use dateAdded here, but this isnt real
-    }); 
+    });
     const recentBooks = sortedBooks.slice(0, 6);
     setNewAdditions(recentBooks);
   };

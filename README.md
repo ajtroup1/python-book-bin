@@ -1,17 +1,26 @@
 # python-book-bin
 
+LOG INTO ADMIN WITH:
+-Username: admin
+-Password: password
+
 Packages:
 -flask
 -flask sql alchemy
 -flask cors
 -react
 
-Where I left off last session: -
+Where I left off last session: 
+-did filters for admin
+
+To-do:
+-Quick add button when hovering a book
+-Make admin usernames error handled to be unique on front end
+-Error test thoroughly for admin and guest task bar and making sure they appear at the correct pages
 
 Pages:
 -Guest:
 -Home
--Cart
 -Checkout
 -Recipt
 -Admin:

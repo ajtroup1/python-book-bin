@@ -9,6 +9,7 @@
   height: 200px;
   margin-left: 70px;
   overflow: hidden;
+  clear: both;
 }
 
 .left-container {

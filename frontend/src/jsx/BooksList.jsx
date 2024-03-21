@@ -16,10 +16,6 @@ function BooksList() {
     console.log("books received: ", data.books);
   };
 
-  const goBackHome = () => {
-    navigate("/home");
-  }
-
   return (
     <>
       <div className="table-container">

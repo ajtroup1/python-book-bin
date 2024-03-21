@@ -14,6 +14,7 @@ class Book(db.Model):
     datePublished = db.Column(db.String(255), nullable=False) #even if date is unknown, have to put something like n/a
     dateAdded = db.Column(db.String(255), nullable=False) #current DateTime
     salePrice = db.Column(db.Float, nullable=False)
+    isCheckedOut = db.Column(db.Boolean, default=False)
 
     # Define relationship to Checkout
     checkouts = relationship("Checkout", back_populates="book")
@@ -31,16 +32,18 @@ class Book(db.Model):
             "datePublished": self.datePublished,
             "dateAdded": self.dateAdded,
             "salePrice": self.salePrice,
+            "isCheckedOut": self.isCheckedOut,
         }
 
 #Admin Model
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    password = db.Column(db.String(255), nullable=False) #forgot to add data hashing, but it's not difficult definitely do that next time
     firstname = db.Column(db.String(255), nullable=False)
     lastname = db.Column(db.String(255), nullable=False)
     employeeID = db.Column(db.String(4), nullable=False)
+    role = db.Column(db.String(255), nullable=False)
 
     def to_json(self): #jsonify the python object for api
         return {
@@ -50,6 +53,7 @@ class Admin(db.Model):
             "firstname": self.firstname,
             "lastname": self.lastname,
             "employeeID": self.employeeID,
+            "role": self.role,
         }
 
 #Checkout Model
@@ -69,5 +73,5 @@ class Checkout(db.Model):
             "date": self.date,
             "email": self.email,
             "bookID": self.bookID,
-            "resolved": self.resolved
+            "resolved": self.resolved,
         }

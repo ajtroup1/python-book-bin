@@ -3,16 +3,178 @@
   align-items: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   margin: 40px;
+  width: 900px;
+  height: 500px;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  float: left;
+}
+
+.adminmanager-container {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  max-height: 350px;
 }
 
 .cover-img {
   height: 120px;
   width: auto;
+  transition: transform 0.3s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.cover-img:hover {
+  transform: scale(1.2); /* Scale to 1.2 on hover */
+}
+.deleted-cover-img {
+  height: 90px;
+  width: auto;
+  transition: transform 0.3s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.deleted-cover-img:hover {
+  transform: scale(1.4); /* Scale to 1.2 on hover */
 }
 
 #books-table {
+  width: 100%; /* Set the width of the table to 100% of its container */
+  border-collapse: collapse;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 td,
 th {
   vertical-align: middle;
+}
+
+.filter-container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin: 40px;
+  width: 450px;
+  height: 500px;
+  float: left;
+}
+.filter-container h4 {
+  margin-top: 10px;
+}
+
+.filter-content {
+  margin: 20px;
+  align-items: center;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: column; /* Display children in a column */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+}
+
+.checkbox-container {
+  display: flex;
+  margin-bottom: 20px; /* Add some space between the checkboxes and search bar */
+}
+
+.form-check {
+  margin-right: 10px;
+}
+
+.name-search-container {
+  display: flex;
+  align-items: center;
+}
+
+.name-search-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.name-search-button {
+  min-width: 80px;
+}
+
+.author-search-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.author-search-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.author-search-button {
+  min-width: 80px;
+}
+
+.genres-group {
+  display: flex;
+  align-items: center;
+}
+
+.genres-group label {
+  margin-right: 10px; /* Adjust spacing between label and select */
+}
+
+.price-checkbox-container {
+  margin-top: 12px;
+  text-align: center; /* Center the text */
+}
+
+.price-checkbox-container p {
+  margin-bottom: 10px; /* Add spacing between the header and checkboxes */
+}
+
+.reset-filters {
+  margin-top: 10px;
+}
+
+.float-left,
+.float-right {
+  display: inline-block;
+  margin-right: 10px; /* Adjust spacing between the checkboxes */
+}
+
+#left-check {
+  float: left;
+}
+#left-check {
+  float: right;
+}
+
+#modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+#modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.create-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#add-new-admin-btn {
+  margin-top: 20px;
 }

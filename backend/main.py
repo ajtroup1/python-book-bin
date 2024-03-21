@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from config import app, db
 from models import Book, Admin, Checkout
+from datetime import datetime
 
 #Return db
 @app.route('/getdb', methods=['GET'])
@@ -35,6 +36,11 @@ def get_book_by_id(id):
     return jsonify({'book:': json_book}), 201
 @app.route('/addbook', methods=['POST'])
 def add_book():
+    current_date = datetime.now().date()
+
+    # Convert the datetime object to a string
+    date_added = current_date.strftime("%Y-%m-%d")
+
     title = request.json.get('title')
     author = request.json.get('author')
     description = request.json.get('description')
@@ -43,8 +49,9 @@ def add_book():
     deleted = False
     condition = request.json.get('condition')
     datePublished = request.json.get('datePublished')
-    dateAdded = request.json.get('dateAdded')
+    dateAdded = date_added #initialize to now, not user input
     salePrice = request.json.get('salePrice')
+    isCheckedOut = False
 
     if not description:
         description = 'No description entered for this book'
@@ -63,6 +70,7 @@ def add_book():
         'datePublished': datePublished,
         'dateAdded': dateAdded,
         'salesPrice': salePrice,
+        'isCheckedOut': False,
     }
 
 
@@ -70,7 +78,7 @@ def add_book():
     if not title or not author or not description or not genre or not coverURL or not condition or not datePublished or not dateAdded or not salePrice:
         return (jsonify({'failed trying to add book:': addBook}), 400,)
     
-    newBook = Book(title=title, author=author, description=description, genre=genre, coverURL=coverURL, deleted=deleted, condition=condition, datePublished=datePublished, dateAdded=dateAdded, salePrice=salePrice)
+    newBook = Book(title=title, author=author, description=description, genre=genre, coverURL=coverURL, deleted=deleted, condition=condition, datePublished=datePublished, dateAdded=dateAdded, salePrice=salePrice, isCheckedOut=isCheckedOut)
 
     try:
         db.session.add(newBook)
@@ -106,13 +114,39 @@ def delete_book(id):
     book = Book.query.get(id)
 
     if not book:
-        return jsonify({'message': 'book not found with that id'}), 400
+        return jsonify({'message': 'book not found with that id'}), 404
     
     book.deleted = not book.deleted
 
     db.session.commit()
 
     return jsonify({'message': 'book deleted toggled successfully'}), 201
+@app.route('/harddeletebook/<int:id>', methods=['DELETE']) #real hard delete. not accessable from the frontend
+def hard_delete_book(id):
+    book = Book.query.get(id)
+
+    if not book:
+        return jsonify({'message': 'book not found with that id'}), 404
+    
+    try:
+        db.session.delete(book)
+        db.session.commit()
+    except Exception as e:
+        return jsonify({'message': str(e)})
+    
+    return jsonify({'message': 'book deleted permanently'}), 201
+@app.route('/togglecheckout/<int:id>', methods=['PATCH'])
+def checkout_book(id):
+    book = Book.query.get(id)
+
+    if not book:
+        return jsonify({'message': 'book to checkout by id not found'}), 404
+    
+    book.isCheckedOut = not book.isCheckedOut
+
+    db.session.commit()
+
+    return jsonify({'message': 'book checkout successfully toggled'})
 
 ###########################################################################################################################
 
@@ -129,11 +163,12 @@ def add_admin():
     firstname = request.json.get('firstname')
     lastname = request.json.get('lastname')
     employeeID = request.json.get('employeeID')
+    role = request.json.get('role')
 
-    if not username or not password or not firstname or not lastname or not employeeID:
-        return jsonify({'message': 'username, password, firstname, lastname, and employeeID are required to add an admin'}), 400
+    if not username or not password or not firstname or not lastname or not employeeID or not role:
+        return jsonify({'message': 'username, password, firstname, lastname, role, and employeeID are required to add an admin'}), 400
     
-    newAdmin = Admin(username=username, password=password, firstname=firstname, lastname=lastname, employeeID=employeeID)
+    newAdmin = Admin(username=username, password=password, firstname=firstname, lastname=lastname, employeeID=employeeID, role=role)
 
     try:
         db.session.add(newAdmin)
@@ -155,6 +190,7 @@ def edit_admin(id):
     admin.firstname = data.get('firstname', admin.firstname)
     admin.lastname = data.get('lastname', admin.lastname)
     admin.employeeID = data.get('employeeID', admin.employeeID)
+    admin.role = data.get('role', admin.role)
 
     db.session.commit()
 

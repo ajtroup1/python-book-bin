@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/AdminLogin.css";
 
-function AdminLogin() {
+function AdminLogin({ handleAdminLogin }) {
   const [admins, setAdmins] = useState([]);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function AdminLogin() {
     document.getElementById("password").value = "";
 
     if (loggedIn == true) {
-      //navigate to AdminHome.jsx
+      handleAdminLogin(); // Update admin status upon successful login
       navigate("/admin-home");
     }
   };
