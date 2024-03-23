@@ -41,7 +41,8 @@ function AdminHome() {
       mode === "deletedbooks" ||
       mode === "booklookup" ||
       mode === "adminmanager" ||
-      mode === "addadmin"
+      mode === "addadmin" ||
+      mode === "showmore"
     ) {
       setIsModalOpen(true);
     }
@@ -329,25 +330,19 @@ function AdminHome() {
     }
   };
 
-  const handlePopulateModal = async (populatewith) => {
-    await setMode(populatewith);
+  const handlePopulateModal = (populatewith) => {
+    setMode(populatewith);
     console.log("current mode: ", mode);
 
-    if (mode == "addbook") {
+    if (
+      populatewith === "addbook" ||
+      populatewith === "editbook" ||
+      populatewith === "deletedbooks" ||
+      populatewith === "adminmanager" ||
+      populatewith === "addadmin" ||
+      populatewith === "showmore"
+    ) {
       setIsModalOpen(true);
-    } else if (mode == "editbook") {
-      setIsModalOpen(true);
-    } else if (mode == "booklookup") {
-      //
-    } else if (mode == "deletedbooks") {
-      setIsModalOpen(true);
-    } else if (mode == "adminmanager") {
-      setIsModalOpen(true);
-    } else if (mode == "addadmin") {
-      if (!isModalOpen) {
-        //really no reason modal wont be open here, but just in case
-        setIsModalOpen(true);
-      }
     }
   };
 
@@ -383,14 +378,6 @@ function AdminHome() {
                   onClick={() => handlePopulateModal("addbook")}
                 >
                   Add A Book
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => handlePopulateModal("booklookup")}
-                >
-                  Book Lookup
                 </a>
               </li>
               <li className="nav-item">
@@ -436,6 +423,7 @@ function AdminHome() {
                     placeholder="Enter title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form-group">
@@ -447,6 +435,7 @@ function AdminHome() {
                     placeholder="Enter author"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form-group">
@@ -458,18 +447,35 @@ function AdminHome() {
                     placeholder="Enter description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    autoComplete="off"
                   ></textarea>
                 </div>
                 <div className="form-group">
                   <label htmlFor="genre">Genre</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="genre"
-                    placeholder="Enter genre"
-                    value={genre}
-                    onChange={(e) => setGenre(e.target.value)}
-                  />
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="genre"
+                      list="genreOptions"
+                      value={genre}
+                      onChange={(e) => setGenre(e.target.value)}
+                    />
+                    <datalist id="genreOptions">
+                      {uniqueGenres.map((uniqueGenre, index) => (
+                        <option key={index} value={uniqueGenre} />
+                      ))}
+                    </datalist>
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={() => setGenre("")}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div className="form-group">
                   <label htmlFor="coverURL">Cover URL</label>
@@ -480,6 +486,7 @@ function AdminHome() {
                     placeholder="Enter cover URL"
                     value={coverURL}
                     onChange={(e) => setCoverURL(e.target.value)}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form-group">
@@ -506,6 +513,7 @@ function AdminHome() {
                     placeholder="Enter date published"
                     value={datePublished}
                     onChange={(e) => setDatePublished(e.target.value)}
+                    autoComplete="off"
                   />
                 </div>
                 <div className="form-group">
@@ -517,6 +525,7 @@ function AdminHome() {
                     placeholder="Enter sales price"
                     value={salePrice}
                     onChange={(e) => setSalePrice(e.target.value)}
+                    autoComplete="off"
                   />
                 </div>
                 <button type="submit" className="btn btn-primary">
@@ -822,6 +831,13 @@ function AdminHome() {
                             </td>
                           </tr>
                         ))}
+                      {/* SHOW MORE MODAL */}
+                      {mode === "showmore" && (
+                        <div>
+                          <h4>Show More</h4>
+                          <img src={editBook.coverURL} alt="Book cover" />
+                        </div>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -976,7 +992,14 @@ function AdminHome() {
                   <td>{book.author}</td>
                   <td>{book.genre}</td>
                   <td>
-                    <img src={book.coverURL} className="cover-img"></img>
+                    <img
+                      src={book.coverURL}
+                      className="cover-img"
+                      onClick={() => {
+                        setEditBook(book); //using edit book to pass one object only to show more
+                        handlePopulateModal("showmore");
+                      }}
+                    />
                   </td>
                   <td>
                     <button

@@ -11,6 +11,7 @@ import AdminLogin from "./AdminLogin.jsx";
 import Home from "./Home.jsx";
 import AdminHome from "./AdminHome.jsx";
 import BooksList from "./BooksList.jsx";
+import "../css/App.css";
 
 function App() {
   const [isAdmin, setIsAdmin] = useState(() => {
@@ -111,6 +112,8 @@ function App() {
 
         <div id="root"></div>
 
+        
+
         {/* Define routes for different components */}
         <Routes>
           <Route path="/" element={<Home />} />
@@ -121,6 +124,7 @@ function App() {
             element={<AdminLogin handleAdminLogin={handleAdminLogin} />}
           />
           <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/books-list" element={<BooksList />} />
         </Routes>
       </div>
     </Router>

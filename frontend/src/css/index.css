@@ -1,3 +1,25 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Footer styles */
+.footer {
+  flex-shrink: 0;
+}
+
 #footer-date {
   margin-left: 58px;
 }
@@ -10,6 +32,7 @@
   margin-left: 70px;
   overflow: hidden;
   clear: both;
+  margin-top: 20px;
 }
 
 .left-container {
