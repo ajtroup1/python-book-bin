@@ -1,4 +1,8 @@
 # python-book-bin
+TO RUN:
+-2 terminals
+-cd into frontend and run 'npm run dev'
+-cd into backend and run 'python main.py'
 
 LOG INTO ADMIN WITH:
 -Username: admin
