@@ -60,9 +60,9 @@ function App() {
                 <Link to="/home" className="nav-item nav-link">
                   Home
                 </Link>
-                <Link to="/collections" className="nav-item nav-link">
+                {/* <Link to="/collections" className="nav-item nav-link">
                   Collections
-                </Link>
+                </Link> */}
                 <Link
                   to="/admin-login"
                   className="nav-item nav-link"
@@ -111,8 +111,6 @@ function App() {
         )}
 
         <div id="root"></div>
-
-        
 
         {/* Define routes for different components */}
         <Routes>

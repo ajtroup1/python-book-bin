@@ -15,7 +15,8 @@ function BooksList() {
   const fetchBooks = async () => {
     const response = await fetch("http://127.0.0.1:5000/books");
     const data = await response.json();
-    const filteredBooks = filterBooks(data.books);
+    const nonDeletedBooks = data.books.filter((book) => book.deleted == false);
+    const filteredBooks = filterBooks(nonDeletedBooks);
     setBooks(filteredBooks);
     console.log("books received: ", data.books);
     console.log("filtered books: ", filteredBooks);
